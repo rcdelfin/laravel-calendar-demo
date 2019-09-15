@@ -1,23 +1,15 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-2">
-                <div class="card card-default">
-                    <div class="card-header">Events</div>
+    <div class="container-fluid">
+        <div class="card card-default">
+            <div class="card-header">Calendar</div>
 
-                    <div class="card-body">
-                        <p>Form</p>
-
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <event-form/>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-10">
-                <div class="card card-default">
-                    <div class="card-header">Calendar</div>
-
-                    <div class="card-body">
-                        <h2>{{ welcome }}</h2>
-
+                    <div class="col-md-8">
+                        <event-list/>
                     </div>
                 </div>
             </div>
@@ -26,12 +18,11 @@
 </template>
 
 <script>
+    import EventForm from './Form.vue';
+    import EventList from './List.vue';
+
     export default {
         name: 'calendar-page',
-        computed: {
-            welcome() {
-                return 'Calendar Demo Page'
-            }
-        }
+        components: {EventForm, EventList}
     }
 </script>
