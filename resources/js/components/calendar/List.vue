@@ -19,7 +19,17 @@
 <script>
     export default {
         name: 'event-list',
+        mounted() {
+            if (this.events.length) {
+                return;
+            }
+
+            this.$store.dispatch('getEvents');
+        },
         computed: {
+            events() {
+                return this.$store.getters.events;
+            }
         }
     }
 </script>

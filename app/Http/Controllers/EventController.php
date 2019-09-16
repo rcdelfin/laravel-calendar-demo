@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Validator, Redirect, Response;
 
 class EventController extends Controller
 {
@@ -25,7 +27,18 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $event = Event::create($request->all());
+         $data = request()->validate([
+            'title' => 'required',
+            "days" => 'required',
+            "fromDate" => 'required',
+            "toDate" => 'required',
+        ]);
+
+         $data['days'] = json_encode($request->days);
+         $data['fromDate'] = date('Y-m-d', strtotime($request->fromDate));
+         $data['toDate'] = date('Y-m-d', strtotime($request->toDate));
+
+        $event = Event::create($data);
 
         return response()->json($event, 201);
     }
@@ -50,7 +63,18 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        $event->update($request->all());
+         $data = request()->validate([
+            'title' => 'required',
+            "days" => 'required',
+            "fromDate" => 'required',
+            "toDate" => 'required',
+        ]);
+
+         $data['days'] = json_encode($request->days);
+         $data['fromDate'] = date('Y-m-d', strtotime($request->fromDate));
+         $data['toDate'] = date('Y-m-d', strtotime($request->toDate));
+
+        $event->update($data);
 
         return response()->json($event, 200);
     }

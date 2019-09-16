@@ -9,6 +9,6 @@ class Event extends Model
     protected $table = 'events';
 
     protected $fillable = [
-        'title', 'days', 'start_date', 'end_date'
+        'title', 'days', 'fromDate', 'toDate'
     ];
 }
