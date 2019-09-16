@@ -1,37 +1,40 @@
 <template>
     <div>
         <notifications group="calendar" position="top right" />
-        <form v-on:submit.prevent="onSubmit">
+        <form v-on:submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
             <div class="form-group">
                 <label for="title">Event</label>
-                <input type="text" class="form-control" id="title" v-model="form.title">
+                <input type="text" class="form-control" id="title" name="title" v-model="form.title">
 
-                <span class="help is-danger" v-if="form.errors.has('title')" v-text="form.errors.get('title')"></span>
+                <p class="text-danger" v-if="form.errors.has('title')" v-text="form.errors.get('title')"></p>
             </div>
 
             <div class="row">
                 <div class="col-md-6">
-                    <label for="fromDate">From</label>
-                    <v2-datepicker id="fromDate" lang="en" format="yyyy-DD-MM" v-model="form.fromDate"></v2-datepicker>
+                    <div class="form-group">
+                        <label for="fromDate">From</label>
+                        <v2-datepicker id="fromDate" lang="en" format="yyyy-DD-MM" name="fromDate" @change="form.errors.clear('fromDate')" v-model="form.fromDate"></v2-datepicker>
 
-                    <span class="help is-danger" v-if="form.errors.has('fromDate')" v-text="form.errors.get('fromDate')"></span>
+                        <p class="text-danger" v-if="form.errors.has('fromDate')" v-text="form.errors.get('fromDate')"></p>
+                    </div>
                 </div>
                 <div class="col-md-6">
-                    <label for="toDate">To</label>
-                    <v2-datepicker id="toDate" lang="en" format="yyyy-DD-MM" v-model="form.toDate"></v2-datepicker>
+                    <div class="form-group">
+                        <label for="toDate">To</label>
+                        <v2-datepicker id="toDate" lang="en" format="yyyy-DD-MM" name="toDate" @change="form.errors.clear('toDate')" v-model="form.toDate"></v2-datepicker>
 
-                    <span class="help is-danger" v-if="form.errors.has('toDate')" v-text="form.errors.get('toDate')"></span>
+                        <p class="text-danger" v-if="form.errors.has('toDate')" v-text="form.errors.get('toDate')"></p>
+                    </div>
                 </div>
             </div>
 
-            <div class="clearfix">&nbsp;</div>
-
-            <div class="form-check form-check-inline" v-for="day in days">
-                <input class="form-check-input" type="checkbox" :id="day.label" name="days" :value="day.key" v-model="form.days">
-                <label class="form-check-label" :for="day.label">{{day.label}}</label>
+            <div class="form-group">
+                <div class="form-check form-check-inline" v-for="day in days">
+                    <input class="form-check-input" type="checkbox" :id="day.label" name="days" :value="day.key" @click="form.errors.clear('days')" v-model="form.days">
+                    <label class="form-check-label" :for="day.label">{{day.label}}</label>
+                </div>
+                <p class="text-danger clearfix" v-if="form.errors.has('days')" v-text="form.errors.get('days')"></p>
             </div>
-
-            <div class="clearfix">&nbsp;</div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

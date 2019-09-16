@@ -53,6 +53,7 @@ class Errors {
      * @param {string|null} field
      */
     clear(field) {
+        console.log('clear', field)
         if (field) {
             delete this.errors[field];
 
@@ -177,10 +178,10 @@ class Form {
 
                     resolve(response.data);
                 })
-                .catch(response => {
-                    this.onFail(response.errors);
+                .catch(error => {
+                    this.onFail(error.response.data.errors);
 
-                    reject(response.errors);
+                    reject(error.response.data.errors);
                 });
         });
     }
