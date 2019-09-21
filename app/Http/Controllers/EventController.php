@@ -51,7 +51,39 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        return $event;
+        date_default_timezone_set('Asia/manila');
+
+        $fromDate = date('Y-m-d', strtotime($event->fromDate));
+        $toDate   = date('Y-m-d', strtotime($event->toDate));
+
+        $event['month'] = date('F', strtotime($event->fromDate));
+
+        $year = (integer)date('Y', strtotime($event->fromDate));
+        $month = (integer)date('m', strtotime($event->fromDate));
+
+        $daysInMonth = (integer)date('t', strtotime($event->fromDate));
+
+        $eventDays = json_decode($event->days);
+
+        $events = [];
+        for($i = 1;$i <= $daysInMonth; $i++) {
+            $date = date('Y-m-d', strtotime($year . '-' . $month . '-' . $i));
+            $weekDay = date('w', strtotime($date));
+            $isEvent = in_array($weekDay, $eventDays);
+            $inEvent = (($date >= $fromDate) && ($date <= $toDate)) ? true : false;
+            $events[] = [
+                'day'       => $i,
+                'date'      => $date,
+                'isEvent'   => ($isEvent && $inEvent) ? true : false,
+                'label'     => $i . ' ' . date('D', strtotime($date)),
+                'title'     => ($isEvent && $inEvent) ? $event->title : ''
+            ];
+        }
+
+        $event['daysInMonth'] = $daysInMonth;
+        $event['events'] = $events;
+
+        return response()->json($event, 200);
     }
 
     /**

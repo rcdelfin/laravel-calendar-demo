@@ -53,7 +53,6 @@ class Errors {
      * @param {string|null} field
      */
     clear(field) {
-        console.log('clear', field)
         if (field) {
             delete this.errors[field];
 
@@ -103,8 +102,8 @@ class Form {
     /**
      * Reset the form fields.
      */
-    reset(id = null, doReset = false) {
-        if (doReset) {
+    reset(id = null, resetForm = false) {
+        if (resetForm) {
             for (let field in this.originalData) {
                 if (Array.isArray(this[field])) {
                     this[field] = [];
@@ -129,8 +128,8 @@ class Form {
      * .
      * @param {string} url
      */
-    post(url, doReset = false) {
-        return this.submit('post', url, doReset);
+    post(url, resetForm = false) {
+        return this.submit('post', url, resetForm);
     }
 
 
@@ -139,8 +138,8 @@ class Form {
      * .
      * @param {string} url
      */
-    put(url, doReset = true) {
-        return this.submit('put', url, doReset);
+    put(url, resetForm = true) {
+        return this.submit('put', url, resetForm);
     }
 
 
@@ -149,8 +148,8 @@ class Form {
      * .
      * @param {string} url
      */
-    patch(url, doReset = true) {
-        return this.submit('patch', url, doReset);
+    patch(url, resetForm = true) {
+        return this.submit('patch', url, resetForm);
     }
 
 
@@ -169,12 +168,13 @@ class Form {
      *
      * @param {string} requestType
      * @param {string} url
+     * @param {boolean} resetForm
      */
-    submit(requestType, url, doReset) {
+    submit(requestType, url, resetForm) {
         return new Promise((resolve, reject) => {
             axios[requestType](url, this.data())
                 .then(response => {
-                    this.onSuccess(response.data, doReset);
+                    this.onSuccess(response.data, resetForm);
 
                     resolve(response.data);
                 })
@@ -192,8 +192,8 @@ class Form {
      *
      * @param {object} data
      */
-    onSuccess(data, doReset) {
-        this.reset(data.id, doReset);
+    onSuccess(data, resetForm) {
+        this.reset(data.id, resetForm);
     }
 
 

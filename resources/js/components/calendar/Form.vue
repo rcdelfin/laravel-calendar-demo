@@ -13,7 +13,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="fromDate">From</label>
-                        <v2-datepicker id="fromDate" lang="en" format="yyyy-DD-MM" name="fromDate" @change="form.errors.clear('fromDate')" v-model="form.fromDate"></v2-datepicker>
+                        <flat-pickr id="fromDate" name="fromDate" class="form-control" placeholder="Start date" @change="form.errors.clear('fromDate')" v-model="form.fromDate"></flat-pickr>
 
                         <p class="text-danger" v-if="form.errors.has('fromDate')" v-text="form.errors.get('fromDate')"></p>
                     </div>
@@ -21,7 +21,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="toDate">To</label>
-                        <v2-datepicker id="toDate" lang="en" format="yyyy-DD-MM" name="toDate" @change="form.errors.clear('toDate')" v-model="form.toDate"></v2-datepicker>
+                        <flat-pickr id="toDate" name="toDate" class="form-control" placeholder="End date" @change="form.errors.clear('toDate')" v-model="form.toDate"></flat-pickr>
 
                         <p class="text-danger" v-if="form.errors.has('toDate')" v-text="form.errors.get('toDate')"></p>
                     </div>
@@ -42,10 +42,16 @@
 </template>
 
 <script>
+    import flatPickr from 'vue-flatpickr-component';
+    import 'flatpickr/dist/flatpickr.css';
+
     import { Form } from '~/helpers/form.js';
 
     export default {
         name: 'event-form',
+        components: {
+          flatPickr
+        },
         data() {
             return {
                 form: new Form({
@@ -80,7 +86,9 @@
                           title: 'Info',
                           text: 'Event update: ' + this.$data.form.title
                         });
-                        this.$store.dispatch('getEvents');
+
+                        // Get current event from API
+                        this.$store.dispatch('getCurrentEvent', this.form.id);
                     });
                 } else {
                     this.form.post('/api/events', false)
@@ -90,7 +98,9 @@
                           title: 'Info',
                           text: 'New Event create: ' + this.$data.form.title
                         });
-                        this.$store.dispatch('getEvents');
+
+                        // Get current event from API
+                        this.$store.dispatch('getCurrentEvent', this.form.id);
                     });
                 }
             },

@@ -8,7 +8,8 @@ export default {
         isLoggedIn: !!user,
         loading: false,
         auth_error: null,
-        events: []
+        events: [],
+        currentEvent: {}
     },
     getters: {
         isLoading(state) {
@@ -25,6 +26,9 @@ export default {
         },
         events(state) {
             return state.events;
+        },
+        currentEvent(state) {
+            return state.currentEvent;
         }
     },
     mutations: {
@@ -51,6 +55,9 @@ export default {
         },
         updateEvents(state, payload) {
             state.events = payload;
+        },
+        setCurrentEvent(state, payload) {
+            state.currentEvent = payload;
         }
     },
     actions: {
@@ -61,6 +68,12 @@ export default {
             axios.get('/api/events')
             .then((response) => {
                 context.commit('updateEvents', response.data.events);
+            })
+        },
+        getCurrentEvent(context, id) {
+            axios.get('/api/events/' + id)
+            .then((response) => {
+                context.commit('setCurrentEvent', response.data);
             })
         }
     }
