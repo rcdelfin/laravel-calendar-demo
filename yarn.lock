@@ -6576,6 +6576,13 @@ vm-browserify@^1.0.1:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.0.tgz#bd76d6a23323e2ca8ffa12028dc04559c75f9019"
   integrity sha512-iq+S7vZJE60yejDYM0ek6zg308+UZsdtPExWP9VZoCFCz1zkJoXFnAX7aZfd/ZwrkidzdUZL0C/ryW+JwAiIGw==
 
+vue-burger-menu@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/vue-burger-menu/-/vue-burger-menu-2.0.2.tgz#49c9568798480faf8d5c681c86768e051b9db1d0"
+  integrity sha512-SOJKRyEiSm92Qafnu1AxKKb9vQkFSHN5RtVyOi0heteObxPhz9gyT2tneInkOL8F9WdDwvop6EcDk/EeIl9p1A==
+  dependencies:
+    vue "^2.5.17"
+
 vue-flatpickr-component@^8.1.3:
   version "8.1.3"
   resolved "https://registry.yarnpkg.com/vue-flatpickr-component/-/vue-flatpickr-component-8.1.3.tgz#65279cfc4910504dbc726dcfc14700d27045bd18"

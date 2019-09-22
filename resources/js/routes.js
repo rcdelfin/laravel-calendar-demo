@@ -7,7 +7,7 @@ import Calendar from './components/calendar/Index.vue';
 export const routes = [
     {
         path: '/',
-        component: Home,
+        component: Calendar, // Home,
         // meta: { requiresAuth: true }
     },
     {
@@ -21,5 +21,5 @@ export const routes = [
     {
         path: '/calendar',
         component: Calendar
-    }    
+    }
 ];

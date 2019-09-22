@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-laravel">
         <div class="container-fluid">
             <router-link class="navbar-brand" to="/">SPA Demo</router-link>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,7 +17,7 @@
                     </template>
                     <template v-else>
                         <li>
-                            <router-link to="/customers" class="nav-link">Customers</router-link>
+                            <router-link to="/calendar" class="nav-link">Calendar</router-link>
                         </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">

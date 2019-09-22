@@ -1,7 +1,7 @@
 <template>
     <div id="main">
-        <Header/>
-        <main id="container-fluid">
+        <SlideMenu/>
+        <main id="page-wrap">
             <router-view></router-view>
         </main>
     </div>
@@ -9,9 +9,10 @@
 
 <script>
     import Header from './Header.vue';
+    import SlideMenu from './SlideMenu.vue';
 
     export default {
         name: 'main-app',
-        components: {Header}
+        components: {Header, SlideMenu}
     }
 </script>
