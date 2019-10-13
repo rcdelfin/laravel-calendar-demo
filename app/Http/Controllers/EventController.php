@@ -57,6 +57,7 @@ class EventController extends Controller
         $toDate   = date('Y-m-d', strtotime($event->toDate));
 
         $event['month'] = date('F', strtotime($event->fromDate));
+        $event['year'] = date('Y', strtotime($event->fromDate));
 
         $year = (integer)date('Y', strtotime($event->fromDate));
         $month = (integer)date('m', strtotime($event->fromDate));

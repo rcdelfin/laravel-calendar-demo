@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>September 2019</h3>
+        <h3>{{currentMonthYear}}</h3>
         <ul class="list-group">
             <li class="list-group-item" v-for="item in calendarEvents" v-bind:class="{ 'list-group-item-success': item.isEvent }">
                 <div class="row">
@@ -22,6 +22,15 @@
     export default {
         name: 'event-list',
         computed: {
+            currentMonthYear() {
+                const monthYear = moment().format('MMMM Y');
+                if (this.$store.getters.currentEvent.events === undefined) {
+                    return monthYear;
+                }
+
+                const {month, year} = this.$store.getters.currentEvent;
+                return month + " " + year;
+            },
             events() {
                 return this.$store.getters.events;
             },
