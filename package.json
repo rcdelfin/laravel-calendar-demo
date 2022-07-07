@@ -25,7 +25,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "moment": "^2.24.0",
+        "moment": "^2.29.4",
         "moment-timezone": "^0.5.26",
         "validate.js": "^0.13.1",
         "vue-burger-menu": "^2.0.2",
