@@ -26,7 +26,7 @@
     },
     "dependencies": {
         "moment": "^2.24.0",
-        "moment-timezone": "^0.5.26",
+        "moment-timezone": "^0.5.35",
         "validate.js": "^0.13.1",
         "vue-burger-menu": "^2.0.2",
         "vue-flatpickr-component": "^8.1.3",
